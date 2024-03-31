@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Marks Sheet</title>
+</head>
+<body>
+  <h1>Student Marks Sheet</h1>
+  <div>
+    <label for="student">Select Student:</label>
+    <select id="student">
+      <option value="">--Select Student--</option>
+      <option value="student1">John Doe</option>
+      <option value="student2">Jane Doe</option>
+      </select>
+  </div>
+  <table id="marks-table">
+    <thead>
+      <tr>
+        <th>Subject</th>
+        <th>Marks</th>
+      </tr>
+    </thead>
+    <tbody>
+      </tbody>
+  </table>
+  <script>
+    const studentSelect = document.getElementById("student");
+    const marksTable = document.getElementById("marks-table");
+
+    studentSelect.addEventListener("change", function() {
+      const selectedStudent = this.value;
+      // Replace this with logic to fetch and display marks based on selectedStudent
+      // For example, you could have an object with student data and populate the table
+      const studentMarks = {
+        "student1": {
+          "Subject 1": 85,
+          "Subject 2": 90,
+          "Subject 3": 78
+        },
+        "student2": {
+          "Subject 1": 72,
+          "Subject 2": 82,
+          "Subject 3": 89
+        }
+      };
+
+      // Clear existing table rows
+      marksTable.getElementsByTagName("tbody")[0].innerHTML = "";
+
+      if (selectedStudent) {
+        const marksData = studentMarks[selectedStudent];
+        for (const subject in marksData) {
+          const row = document.createElement("tr");
+          const subjectCell = document.createElement("td");
+          const marksCell = document.createElement("td");
+          subjectCell.textContent = subject;
+          marksCell.textContent = marksData[subject];
+          row.appendChild(subjectCell);
+          row.appendChild(marksCell);
+          marksTable.getElementsByTagName("tbody")[0].appendChild(row);
+        }
+      }
+    });
+  </script>
+</body>
+</html>
